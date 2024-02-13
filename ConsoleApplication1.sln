@@ -1,31 +1,99 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.8.34525.116
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.vcxproj", "{2672FE98-8617-47CA-B992-69E5B932694D}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
-		Release|x64 = Release|x64
-		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2672FE98-8617-47CA-B992-69E5B932694D}.Debug|x64.ActiveCfg = Debug|x64
-		{2672FE98-8617-47CA-B992-69E5B932694D}.Debug|x64.Build.0 = Debug|x64
-		{2672FE98-8617-47CA-B992-69E5B932694D}.Debug|x86.ActiveCfg = Debug|Win32
-		{2672FE98-8617-47CA-B992-69E5B932694D}.Debug|x86.Build.0 = Debug|Win32
-		{2672FE98-8617-47CA-B992-69E5B932694D}.Release|x64.ActiveCfg = Release|x64
-		{2672FE98-8617-47CA-B992-69E5B932694D}.Release|x64.Build.0 = Release|x64
-		{2672FE98-8617-47CA-B992-69E5B932694D}.Release|x86.ActiveCfg = Release|Win32
-		{2672FE98-8617-47CA-B992-69E5B932694D}.Release|x86.Build.0 = Release|Win32
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {6905B935-6CB7-40BB-B9A6-BB4016D6705B}
-	EndGlobalSection
-EndGlobal
+#include <iostream>
+#include <string>
+using namespace std;
+
+class bank_account
+{
+private :
+	string name;
+	double balance;
+
+public: 
+	bank_account(string account_name, double initial_balance)
+		: name(account_name), balance(initial_balance){}
+
+	void withdrawl(double amount) {
+		if (amount <= balance) {
+			balance = balance - amount;
+		}
+		else{
+			cout << "insufficient funds";
+		} cout << endl;
+	}
+
+	void deposit(double amount) {
+		if (amount > 0) {
+			balance = balance + amount;
+		}
+		else {
+			cout << "Insufficient Deposit Amount";
+		}
+		cout << endl;
+	}
+
+	void display() {
+		cout << "Account Name: " << name << "\n Balance: $" << balance << endl;
+	}
+};
+
+int main() {
+	string name;
+	double initial_deposit = 0;
+	int amount;
+	int choice;
+
+	
+	
+
+	cout << "Please enter your account name" << endl;
+	cin >> name;
+	cout << "Initial deposit : ";
+	cin >> initial_deposit;
+    bank_account account(name , initial_deposit);
+
+	cout << "---------------------------------------------" << endl;
+	cout << "Welcome " << name << " What can we do for you ? " << endl;
+	cout << "1) Deposit" << endl;
+	cout << "2) Withdrawal" << endl;
+	cout << "3) View Account" << endl;
+	cout << "4) quit" << endl;
+	
+	
+	
+	do {
+		cin >> choice;
+		
+	
+	switch (choice) {
+		case 1:
+			cout << "How much will you be depositing: $";
+			cin >> amount;
+			account.deposit(amount);
+			break;
+
+		case 2:
+			cout << "How much will you be withdrawaling: $";
+			cin >> amount;
+			account.withdrawl(amount);
+			break;
+
+		case 3:
+			account.display();
+			break;
+		defalt:break;
+		}
+	cout << "what else can i help with ? ";
+	cout << "1) Deposit" << endl;
+	cout << "2) Withdrawal" << endl;
+	cout << "3) View Account" << endl;
+	cout << "4) quit" << endl;
+	
+
+	} while (choice != 4);
+
+	cout << "Thank you for using my banking system " << name << " :)" << endl;
+
+	return 0;
+
+
+}
